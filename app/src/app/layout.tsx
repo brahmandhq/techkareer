@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description: "The only app you need for hiring",
 };
 
+const imagePath = "./og.png";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +24,6 @@ export default function RootLayout({
     </Head>
     <html lang="en">
       <body className={inter.className}>
-      <img src="./og.png" alt="Techkareer" />
       {children}</body>
     </html>
     </>
