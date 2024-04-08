@@ -7,9 +7,14 @@ import Testimonials from "./Testimonials";
 import CompaniesHiredFromUs from "./CompaniesHiredFromUs";
 import JobOpportunities from "./JobOpportunities";
 import TopTalentSection from "./TopTalentSection";
+import Head from "next/head";
 
 const LandingPage = () => {
   return (
+    <>
+    <Head>
+      <link rel='icon' href='/favicon.ico' />
+    </Head>
     <main className="">
       <div className="flex flex-col items-center justify-center">
         <LampContainer>
@@ -47,6 +52,7 @@ const LandingPage = () => {
         <TopTalentSection />
       </div>
     </main>
+    </>
   );
 };
 
