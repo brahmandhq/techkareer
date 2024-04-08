@@ -6,11 +6,17 @@ import Head from "next/head";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Techkareer",
-  description: "The only app you need for hiring",
+  openGraph: {
+    images: [
+      {
+        url: "https://localhost:3000/app/og",
+        width: 1200,
+        height: 630,
+        alt: "Techkareer",
+      },
+    ],
+  },
 };
-
-const imagePath = "./og.png";
 
 export default function RootLayout({
   children,
@@ -20,7 +26,7 @@ export default function RootLayout({
   return (
     <>
     <Head>
-     <link rel='icon' href='./favicon.ico' />
+     <link rel='icon' href='/favicon.ico' />
     </Head>
     <html lang="en">
       <body className={inter.className}>

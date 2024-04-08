@@ -11,6 +11,7 @@
   "dependencies": {
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
+    "@vercel/og": "^0.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "flowbite-react": "^0.7.6",
