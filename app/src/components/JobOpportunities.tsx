@@ -67,7 +67,7 @@ const JobOpportunities = () => {
   }
 
   return (
-    <section className="py-12">
+    <section className="py-12" id="JobOpportunity">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center text-white mb-8">
           Job Opportunities

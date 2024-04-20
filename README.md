@@ -1,16 +1,25 @@
 
 # Techkareer
 
-The biggest tech opportunities aggregator. Find your next gig, internship, and job at our platform.
+Welcome to Techkareer, the ultimate tech opportunities aggregator! Find your next gig, internship, or job right here on our platform.
 
-Please ignore the `server` and `ui` folders now. Please use the `app` folder.
+## Important Note
+Please ignore the `server` and `ui` folders now. Please use the `app` folder instead.
 
-**Tech Stack:** Nextjs, Typescript, Postgres and TailwindCSS
+## Tech Stack
+Our platform is built with the following technologies:
 
-### Local Development Instructions 
+- Next.js
+- TypeScript
+- Postgres
+- Tailwind CSS
+
+## Local Development Instructions
+
+To get started with local development, follow these simple steps:
+
 ```
 cd app
-npm run install
+npm install
 npm run dev
 ```
-

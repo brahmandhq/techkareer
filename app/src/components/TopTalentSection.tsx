@@ -50,7 +50,7 @@ const TopTalentSection = () => {
   };
 
   return (
-    <section className="py-12">
+    <section className="py-12" id="TopTalent">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold text-center text-white mb-8">
           Top Talent
