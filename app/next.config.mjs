@@ -8,6 +8,7 @@ const nextConfig = {
       "https://banterai.app",
       "avatars.githubusercontent.com",
       "media.licdn.com",
+      "v5.airtableusercontent.com",
     ],
   },
 };

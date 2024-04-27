@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import topTalentData from "../utils/data/top-talent.json";
 import { Button } from "./ui/button";
 
 const TopTalentSection = () => {
@@ -8,17 +7,43 @@ const TopTalentSection = () => {
   const [talentsToShow, setTalentsToShow] = useState<number>(6);
 
   type Talent = {
-    ID: number;
-    "Introduction / Pitch": string;
+    fields: {
+      ID: number;
+      "Introduction / Pitch": string;
+    };
   };
 
   useEffect(() => {
-    setTopTalent(topTalentData);
+    fetchData();
   }, []);
 
   useEffect(() => {
     setDisplayedTalents(topTalent.slice(0, talentsToShow));
   }, [topTalent, talentsToShow]);
+
+  const fetchData = async () => {
+    try {
+      const requestOptions = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.DEVKIT_AIRTABLE_API_KEY}`,
+        },
+      };
+      const response = await fetch(
+        "https://api.airtable.com/v0/appX3kHVPitSufv76/Application%20Form?view=Application%20Form",
+        requestOptions
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+
+      const data = await response.json();
+      setTopTalent(data.records);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleBrowseMore = () => {
     setTalentsToShow(talentsToShow + 6);
@@ -33,7 +58,7 @@ const TopTalentSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedTalents.map((talent) => (
             <div
-              key={talent.ID}
+              key={talent.fields.ID}
               className="p-6 rounded-lg shadow-lg flex flex-col"
               style={{
                 background:
@@ -41,10 +66,10 @@ const TopTalentSection = () => {
               }}
             >
               <h3 className="text-xl font-semibold text-white mb-4">
-                Talent ID: {talent.ID}
+                Talent ID: {talent.fields.ID}
               </h3>
               <p className="text-white mb-4">
-                {talent["Introduction / Pitch"]}
+                {talent.fields["Introduction / Pitch"]}
               </p>
             </div>
           ))}
