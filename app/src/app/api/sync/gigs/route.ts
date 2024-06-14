@@ -36,6 +36,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
     if (newRecords.length > 0) {
       await db.gigs.createMany({
         data: newRecords.map((record) => ({
+          userId: 0, // Change the type of userId from string to number
           id: record.Id,
           title: record.Title,
           desc: record.Desc,
