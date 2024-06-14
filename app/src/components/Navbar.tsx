@@ -72,14 +72,14 @@ export const Navbar = () => {
 
                                     });
                                 }}
-                                className="bg-white/90 px-4 py-2 md:px-6 md:py-3 border-[.1px] border-solid border-gray-200/10 rounded-full   font-bold tracking-wider "
+                                className="bg-white/90 min-w-[100px] flex justify-center items-center px-4 py-2 md:px-6 md:py-3 border-[.1px] border-solid border-gray-200/10 rounded-full   font-bold tracking-wider "
                                 whileHover={{ backgroundColor: "#F9F9F9", color: "#000" }}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 <p className="text-xs md:text-sm text-black">
 
                                     {
-                                        loggingOut ? <Loader className="animate-spin" /> : "Logout"
+                                       loggingOut ? <Loader className="animate-spin" /> : "Logout"
                                     }
                                 </p>
                             </motion.button>

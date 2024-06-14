@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 
 import useSWR from 'swr';
+import { useState } from "react";
 
 export const useUser = () => {
     const { data: session, status } = useSession();
@@ -25,14 +26,17 @@ export const useUser = () => {
 
 
 export const useUserInfo = (id: string) => {
+    const [loading, setLoading] = useState(true);
     const { data: user, error } = useSWR(`/api/user/profile/${id}`, async (url: string) => {
         const res = await axios.get(url);
+        setLoading(false);
         return res.data.user;
+   
     });
 
     return {
         user,
-        loading: !user && !error,
+        loading: loading,
         error: error,
     };
 };

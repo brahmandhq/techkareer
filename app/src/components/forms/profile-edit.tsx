@@ -120,7 +120,7 @@ export function EditProfileForm({ userId }: { userId: string }) {
 
       if (res.status === 200) {
         toast.success("Profile Updated");
-        router.push(`/profile/`);
+        router.push(`/profile/${userId}`);
       }
     } catch (err: any) {
       toast.error(err.response.data.message);

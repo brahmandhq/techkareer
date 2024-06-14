@@ -18,6 +18,8 @@ function RightBarJobseekerList() {
   const { data: jobseekers, isSuccess } = useFetchAllJobseekers(
     "seekers-for-section"
   );
+
+  console.log(jobseekers);
   useEffect(() => {
     if (jobseekers && jobseekers.length > 0) {
       setSeekers(() => shuffle([...jobseekers]));
@@ -41,7 +43,7 @@ function RightBarJobseekerList() {
               .map((jobseeker: User) => {
                 return (
                   <div
-                    onClick={() => router.push(`/jobseekers/${jobseeker.id}`)}
+                    onClick={() => router.push(`/profile/${jobseeker.id}`)}
                     key={jobseeker.id}
                   >
                     <div className="profile-pic-follow  mt-1 flex  py-3 items-center w-full gap-4 hover:bg-gray-200/20 rounded-xl transition-all px-1 cursor-pointer">

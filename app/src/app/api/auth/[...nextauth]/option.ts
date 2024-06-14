@@ -78,13 +78,14 @@ export const options: NextAuthOptions = {
       }
     }),
     GoogleProvider({
-      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || "",
     })
   ],
 
   callbacks: {
     async jwt({ token, user, account }) {
+      console.log(token, user, account)
       const email = user?.email
       if (typeof email === 'string') {
         if (account?.provider === 'google' && user) {
