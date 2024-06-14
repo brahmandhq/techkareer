@@ -1,7 +1,7 @@
-import { AtSign, Eye, EyeOff, Link, User } from 'lucide-react';
-import * as React from 'react';
+import { AtSign, Eye, EyeOff, Link, User } from "lucide-react";
+import * as React from "react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -9,71 +9,68 @@ export interface InputProps
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     const [show, setShow] = React.useState(false);
-    if (type == 'password') {
+    if (type == "password") {
       return (
-        <div className='relative'>
+        <div className=" relative">
           <input
-            type={show ? 'text' : 'password'}
+            type={show ? "text" : "password"}
             className={cn(
-              'flex h-9 w-full border rounded-md  bg-transparent px-3 py-1 pr-8 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground  disabled:cursor-not-allowed disabled:opacity-50',
+              "flex h-9 w-full border rounded-md  bg-transparent px-3 py-1 pr-8 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground  disabled:cursor-not-allowed disabled:opacity-50",
               className
             )}
             ref={ref}
             {...props}
           />
           <button
-            type='button'
-            className='absolute right-2 top-2'
+            type="button"
+            className="absolute right-2 top-4"
             onClick={() => setShow(!show)}
           >
             {!show ? (
-              <EyeOff size={20} color='#373737' strokeWidth={1.75} />
+              <EyeOff size={20} color="#373737" strokeWidth={1.75} />
             ) : (
-              <Eye size={20} color='#373737' strokeWidth={1.75} />
+              <Eye size={20} color="#373737" strokeWidth={1.75} />
             )}
           </button>
         </div>
       );
     }
-    if (type == 'email' || type == 'username') {
+    if (type == "email" || type == "username") {
       return (
-        <div className='relative'>
+        <div className="relative">
           <input
-            type='text'
+            type="text"
             className={cn(
-              'flex h-9 w-full rounded-md border border-input bg-transparent px-3 pr-8 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+              "flex h-9 w-full rounded-md border border-input bg-transparent px-3 pr-8 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
               className
             )}
             ref={ref}
             {...props}
           />
-          <div className='absolute right-2 top-2'>
-            {type == 'email' ? (
-              <AtSign size={20} color='#373737' strokeWidth={1.75} />
+          <div className="absolute right-2 top-2">
+            {type == "email" ? (
+              <AtSign size={20} color="#373737" strokeWidth={1.75} />
             ) : (
-              <User size={20} color='#373737' strokeWidth={1.75} />
+              <User size={20} color="#373737" strokeWidth={1.75} />
             )}
           </div>
         </div>
       );
     }
-    if(type == "link"){
+    if (type == "link") {
       return (
-        <div className='relative'>
+        <div className="relative">
           <input
-            type='text'
+            type="text"
             className={cn(
-              'flex h-9 w-full rounded-md border border-input bg-transparent px-3 pr-8 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+              "flex h-9 w-full rounded-md border border-input bg-transparent px-3 pr-8 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
               className
             )}
             ref={ref}
             {...props}
           />
-          <div className='absolute right-2 top-2'>
-     
-
-              <Link size={20} color='#373737' strokeWidth={1.75} />
-           
+          <div className="absolute right-2 top-2">
+            <Link size={20} color="#373737" strokeWidth={1.75} />
           </div>
         </div>
       );
@@ -82,7 +79,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
           className
         )}
         ref={ref}
@@ -91,6 +88,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export { Input };

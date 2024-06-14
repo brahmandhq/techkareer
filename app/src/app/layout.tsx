@@ -5,21 +5,22 @@ import Providers from "./Providers";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
+  title: "Techkareer | The only app you need for hiring",
+  description: "The only app you need for hiring",
+
   openGraph: {
     title: "Techkareer",
     description: "The only app you need for hiring",
-    siteName: 'Techkareer',
+    siteName: "Techkareer",
     images: [
       {
-        url: 'https://www.techkareer.com/og.png',
+        url: "https://www.techkareer.com/og.png",
         width: 800,
         height: 600,
       },
-
     ],
-    locale: 'en_US',
-    type: 'website',
-
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
@@ -27,9 +28,7 @@ export const metadata: Metadata = {
     creator: "@itsharshag",
     images: ["https://www.techkareer.com/og.png"],
   },
-
-}
-
+};
 
 export default function RootLayout({
   children,
@@ -51,7 +50,6 @@ export default function RootLayout({
           type="image/<generated>"
           sizes="<generated>"
         />
-
       </Head>
       <body>
         <Providers>{children}</Providers>
