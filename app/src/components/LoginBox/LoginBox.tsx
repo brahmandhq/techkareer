@@ -163,7 +163,7 @@ function LoginBox() {
                     <div className="flex justify-center items-center w-full">
                       <button
                         type="submit"
-                        className="text-xl next-ui-gradient-btn bg-blue-600 text-white px-5 py-3 rounded-xl min-w-[170px]"
+                        className="text-xl flex items-center justify-center next-ui-gradient-btn bg-blue-600 text-white px-5 py-3 rounded-xl min-w-[170px]"
                       >
                         {loading ? (
                           <Loader className="animate-spin" />
