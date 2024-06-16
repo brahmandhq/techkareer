@@ -26,10 +26,10 @@ export const Footer = () => {
           © 2024 Techkareer. All rights reserved.
         </p>
         <div className="flex gap-5">
-          <Link target="_blank" href="/terms-of-service" className="text-sm">
+          <Link target="_blank" href="/privacy-policy" className="text-sm">
             Privacy Policy
           </Link>
-          <Link target="_blank" href="/privacy-policy" className="text-sm">
+          <Link target="_blank" href="/terms-of-service" className="text-sm">
             Terms of service
           </Link>
         </div>

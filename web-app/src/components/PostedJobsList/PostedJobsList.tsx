@@ -83,7 +83,7 @@ function PostedJobsList() {
           <Loader size="30px" />
         </div>
       ) : (
-        <div className="flex flex-col  h-full w-full overflow-x-none overflow-y-auto gap-4">
+        <div className="flex flex-row h-full w-full overflow-auto gap-6 flex-wrap">
           {jobs &&
             jobs.map((job) => <JobCard job={job} key={job.id}></JobCard>)}
         </div>
