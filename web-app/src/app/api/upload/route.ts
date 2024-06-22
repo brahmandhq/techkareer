@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       "pdf_url": resumeLink,
     })
     const skills = resumeInfo.data.skills.split(",");
-    console.log("skills", skills);
+
     const newUser = await db.user.update({
       where: {
         id: id as string,
@@ -43,9 +43,6 @@ export async function POST(req: NextRequest) {
       },
     
     })
-    console.log("resumeLink", resumeLink);
-    console.log("resumeInfo", resumeInfo.data);
-
     return NextResponse.json({ message: "Hello World" });
   } catch (err) {
     console.log(err);
