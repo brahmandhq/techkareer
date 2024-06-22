@@ -80,7 +80,6 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log({ token });
       return {
         ...session,
         user: {
