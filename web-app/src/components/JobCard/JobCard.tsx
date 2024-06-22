@@ -7,7 +7,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-function JobCard({ job }: { job: Opportunity }) {
+function JobCard({ job, isSelected, onClick }: {
+  job: Opportunity;
+  isSelected: boolean;
+  onClick: () => void;
+}) {
   const minAnnualPay: any = job?.minAnnualPay ? job?.minAnnualPay / 10 ** 5 : 0;
   const maxAnnualPay = job?.maxAnnualPay ? job?.maxAnnualPay / 10 ** 5 : 0;
 
@@ -35,8 +39,11 @@ function JobCard({ job }: { job: Opportunity }) {
   const payText = constructPayText();
 
   return (
-    <>
-      <div className="max-xl:my-[15px] max-xl:w-full w-[45%] border border-transparent  bg-slate-800/50 py-4 px-4 rounded-[10px] flex gap-4">
+    <div
+      className={`w-full border-b border-zinc-800/50 p-4 cursor-pointer ${isSelected ? 'bg-zinc-700/20' : 'hover:bg-zinc-700/20'}`}
+      onClick={onClick}
+    >
+      <div className="flex items-start">
         <div className="org-logo h-full flex justify-center mt-2 ms-1 ">
           <div className="logo-container relative h-[4rem] w-[4rem] overflow-hidden ">
             {job.companyLogo ? (
@@ -80,17 +87,8 @@ function JobCard({ job }: { job: Opportunity }) {
             {job.durationInMonths ? `🕒 ${job.durationInMonths} months` : ""}
           </div>
         </div>
-        <div>
-          <Link
-            href={`https://airtable.com/appX3kHVPitSufv76/shrwapikBLgGoQcLD?prefill_Job ID=${job.jobId}`}
-            className="block cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-            target="_blank"
-          >
-            Apply
-          </Link>
-        </div>
       </div>
-    </>
+    </div>
   );
 }
 
