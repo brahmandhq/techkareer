@@ -27,7 +27,7 @@ export const Navbar = () => {
         transition={{ duration: 0.8 }}
         className="flex  justify-between items-center w-[1300px] md:px-6 md:ml-8 px-4 "
       >
-        <div className=" w-[160px] md:w-[220px]">
+        <div className="max-sm:w-[120px] w-[160px] md:w-[220px]">
           <Image
             className="cursor-pointer"
             src={logo}
@@ -53,7 +53,7 @@ export const Navbar = () => {
             </Link>
           ))}
         </div>
-        <div className=" flex flex-row gap-5">
+        <div className=" flex flex-row gap-5 max-sm:gap-2">
           <ReactLink
             spy={true}
             smooth={true}
@@ -65,7 +65,7 @@ export const Navbar = () => {
               whileHover={{ backgroundColor: "#F9F9F9", color: "#000" }}
               whileTap={{ scale: 0.95 }}
             >
-              <p className="text-xs md:text-sm">OPPORTUNITIES</p>
+              <p className="text-xs md:text-sm">POSITION</p>
             </motion.button>
           </ReactLink>
           {status ? (
