@@ -66,7 +66,7 @@ function JobCard({ job }: { job: Opportunity }) {
             <div className="title text-[16px] font-900">{job.role}</div>
           </div>
           <div className="job-location flex text-[13px]   gap-2 text-[#868788]  ">
-            <div className="org-name w-full text-[14px] text-[#868788] word-wrap-overflow w-24 flex">
+            <div className="org-name w-full text-[14px] text-[#868788] word-wrap-overflow flex">
               {`${job.companyName}`}
             </div>
           </div>
