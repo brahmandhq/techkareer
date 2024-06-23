@@ -2,7 +2,7 @@
 import { Activity, Anchor, CircleDot, LifeBuoy, MousePointerClick, Palette } from 'lucide-react';
 
 
-const feature = [ 
+const feature = [
     {
         icon:<Activity/>,
         name:"Find Your Perfect Fit",

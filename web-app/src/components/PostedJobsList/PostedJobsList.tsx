@@ -56,8 +56,6 @@ function PostedJobsList() {
             )}
           </div>
         </>
-      )}
-    </div>
   );
 }
 

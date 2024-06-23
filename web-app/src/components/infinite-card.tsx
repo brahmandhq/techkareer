@@ -1,9 +1,33 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
+
+const scrollingStyles = `
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.scroller {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);
+}
+
+.scroller ul {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: scroll var(--animation-duration) linear infinite var(--animation-direction);
+}
+
+.scroller ul.paused {
+  animation-play-state: paused;
+}
+`;
+
 export const InfiniteMovingCards = ({
   items,
   direction = "left",
@@ -22,80 +46,50 @@ export const InfiniteMovingCards = ({
   pauseOnHover?: boolean;
   className?: string;
 }) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
+    const container = containerRef.current;
+    const scroller = scrollerRef.current;
+
+    if (container && scroller) {
+      const scrollerContent = Array.from(scroller.children);
 
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
+        scroller.appendChild(duplicatedItem);
       });
 
-      getDirection();
-      getSpeed();
-      setStart(true);
+      container.style.setProperty("--animation-direction", direction === "left" ? "forwards" : "reverse");
+      container.style.setProperty("--animation-duration", speed === "fast" ? "20s" : speed === "slow" ? "40s" : "80s");
     }
-  }
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "forwards"
-        );
-      } else {
-        containerRef.current.style.setProperty(
-          "--animation-direction",
-          "reverse"
-        );
-      }
-    }
-  };
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "80s");
-      }
-    }
-  };
+  }, [direction, speed]);
+
   return (
-    <div
-      ref={containerRef}
-      className={cn(
-        "scroller relative z-20  w-full overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className
-      )}
-    >
-      <ul
-        ref={scrollerRef}
-        className={cn(
-          " flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap",
-          start && "animate-scroll "
-        )}
+    <div>
+      <style>{scrollingStyles}</style>
+      <div
+        ref={containerRef}
+        className={cn("scroller", className)}
       >
-        {items.map((item, idx) => (
-          <TestimonialCard
-            key={idx}
-            image={item.image}
-            name={item.name}
-            role={item.role}
-            des={item.des}
-          />
-        ))}
-      </ul>
+        <ul
+          ref={scrollerRef}
+          className="flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap"
+          onMouseEnter={() => pauseOnHover && scrollerRef.current?.classList.add('paused')}
+          onMouseLeave={() => pauseOnHover && scrollerRef.current?.classList.remove('paused')}
+        >
+          {items.map((item, idx) => (
+            <TestimonialCard
+              key={idx}
+              image={item.image}
+              name={item.name}
+              role={item.role}
+              des={item.des}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
@@ -117,7 +111,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div>
         <Image
           src={image}
-          alt=""
+          alt={name}
           width={60}
           height={60}
           className="rounded-full min-w-[60px] min-h-[60px]"

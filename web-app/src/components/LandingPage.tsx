@@ -9,6 +9,7 @@ import { Companies } from "./companies";
 import { Sponsor } from "./sponsor";
 import { Footer } from "./footer";
 import { useSession } from "next-auth/react";
+import BootCamps from "./BootCamps";
 
 const LandingPage = () => {
   const { data: session, status } = useSession();
@@ -22,9 +23,10 @@ const LandingPage = () => {
         className="mt-0"
         direction="left"
         speed="slow"
-      />
+        />
       <Feature />
       <Opportunities />
+      <BootCamps/>
       <Companies />
       {/* <Sponsor /> */}
       <Footer />
