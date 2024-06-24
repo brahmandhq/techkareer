@@ -1,17 +1,21 @@
 "use client";
-// import { useFetchJobsPostedByOrganzations } from "@/hooks/useJobData";
+
 import React, { useEffect, useState } from "react";
 import { JobCard } from "../components";
 import Loader from "../ui/Loader";
 import { Opportunity } from "@/types/type";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 function PostedJobsList() {
-
-  const [jobs, setJobs] = useState<Opportunity[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [selectedJob, setSelectedJob] = useState<Opportunity | null>(null)
+  const { data: session } = useSession();
+  const [jobs, setJobs] = useState<Opportunity[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedJob, setSelectedJob] = useState<Opportunity | null>(null);
+  const isMobile = useMediaQuery("(max-width: 640px)");
 
   useEffect(() => {
     async function fetchJobs() {
@@ -30,32 +34,77 @@ function PostedJobsList() {
     fetchJobs()
   }, [])
 
+
+  if (!session) {
+    return (
+      <main className="flex h-full w-full flex-col items-center justify-center">
+        <h3 className="text-2xl font-medium text-violet-400 sm:text-3xl md:text-4xl lg:text-5xl mb-5">
+          Login to view posted jobs
+        </h3>
+        <div className="group relative w-fit transition-transform duration-300 active:scale-95">
+          <Link href="login">
+            <button className="relative z-10 rounded-lg bg-gradient-to-br from-indigo-500 to-fuchsia-500 p-0.5 duration-300 group-hover:scale-110">
+              <span className="block rounded-md bg-slate-950 px-4 py-2 font-semibold text-slate-100 duration-300 group-hover:bg-slate-950/50 group-hover:text-slate-50 group-active:bg-slate-950/80">
+                Login To Access
+              </span>
+            </button>
+          </Link>
+          <span className="pointer-events-none absolute -inset-4 z-0 transform-gpu rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 opacity-30 blur-xl transition-all duration-300 group-hover:opacity-90 group-active:opacity-50" />
+        </div>
+      </main>
+    )
+  }
+
+
   return (
-    <div className="flex h-full w-full">
+    <>
       {isLoading ? (
         <div className="flex h-full w-full items-center justify-center">
           <Loader size="30px" />
         </div>
       ) : (
         <>
-          <div className="w-[45%] border-r border-gray-300 overflow-y-auto">
-            {jobs && jobs.map((job) => (
-              <JobCard
-                key={job.jobId}
-                job={job}
-                isSelected={selectedJob?.jobId === job.jobId}
-                onClick={() => setSelectedJob(job)}
-              />
-            ))}
-          </div>
-          <div className="w-2/3 p-6">
-            {selectedJob ? (
-              <JobDetails job={selectedJob} />
-            ) : (
-              <p>Select a job to view details</p>
+          <div className="flex sm:flex-row flex-col h-full w-full">
+            <div className="w-full sm:w-[45%] border-r border-gray-300 overflow-y-auto">
+              {jobs && jobs.map((job) => (
+                isMobile ? (
+                  <Drawer key={job.jobId}>
+                    <DrawerTrigger asChild>
+                      <div>
+                        <JobCard
+                          job={job}
+                          isSelected={selectedJob?.jobId === job.jobId}
+                          onClick={() => setSelectedJob(job)}
+                        />
+                      </div>
+                    </DrawerTrigger>
+                    <DrawerContent>
+                      <JobDetails job={job} />
+                    </DrawerContent>
+                  </Drawer>
+                ) : (
+                  <JobCard
+                    key={job.jobId}
+                    job={job}
+                    isSelected={selectedJob?.jobId === job.jobId}
+                    onClick={() => setSelectedJob(job)}
+                  />
+                )
+              ))}
+            </div>
+            {!isMobile && (
+              <div className="hidden sm:block w-[55%] overflow-y-auto p-6">
+                {selectedJob ? (
+                  <JobDetails job={selectedJob} />
+                ) : (
+                  <p>Select a job to view details</p>
+                )}
+              </div>
             )}
           </div>
         </>
+      )}
+    </>
   );
 }
 
@@ -63,7 +112,7 @@ export default PostedJobsList;
 
 function JobDetails({ job }: { job: Opportunity }) {
   return (
-    <div>
+    <div className="p-6">
       <img
         src={job.companyLogo}
         className="w-12 h-12 rounded-full"
@@ -93,13 +142,12 @@ function JobDetails({ job }: { job: Opportunity }) {
             <span>Apply</span>
           </Button>
         </Link>
-
         <Button variant="secondary" className="flex items-center space-x-2">
           <BookmarkIcon className="w-4 h-4" />
           <span>Save</span>
         </Button>
       </div>
-    </div >
+    </div>
   );
 }
 
