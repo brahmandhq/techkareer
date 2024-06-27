@@ -54,20 +54,6 @@ export const Navbar = () => {
           ))}
         </div>
         <div className=" flex flex-row gap-5 max-sm:gap-2">
-          <ReactLink
-            spy={true}
-            smooth={true}
-            duration={500}
-            to={"opportunities"}
-          >
-            <motion.button
-              className="bg-[#15151f] px-4 py-2 md:px-6 md:py-3 border-[.1px] border-solid border-gray-200/10 rounded-full  font-bold tracking-wider"
-              whileHover={{ backgroundColor: "#F9F9F9", color: "#000" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <p className="text-xs md:text-sm">POSITION</p>
-            </motion.button>
-          </ReactLink>
           {status ? (
             <motion.button
               onClick={() => {

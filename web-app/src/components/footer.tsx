@@ -15,10 +15,13 @@ export const Footer = () => {
           className="mb-8"
         />
         <div className="flex flex-row gap-6 mb-5">
-          <Link href="https://twitter.com/_techkareer">
+          <Link target="_blank" href="https://x.com/techkareer">
             <Twitter size={30} fill="white" />
           </Link>
-          <Link href="https://www.linkedin.com/showcase/techkareer/about/">
+          <Link
+            target="_blank"
+            href="https://www.linkedin.com/showcase/techkareer/about/"
+          >
             <Linkedin size={30} />
           </Link>
         </div>
