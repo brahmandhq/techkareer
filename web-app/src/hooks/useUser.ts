@@ -26,9 +26,11 @@ export const useUser = () => {
 export const useUserInfo = (id: string) => {
   const [loading, setLoading] = useState(true);
   const { data: user, error } = useSWR(
-    `/api/user/profile/${id}`,
+    `/api/user`,
     async (url: string) => {
-      const res = await axios.get(url);
+      const res = await axios.post(url,{
+        id: id,
+      });
       setLoading(false);
       return res.data.user;
     }

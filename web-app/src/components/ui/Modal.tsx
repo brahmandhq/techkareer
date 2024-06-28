@@ -1,12 +1,19 @@
 "use client";
 import React, { useState, ChangeEvent, DragEvent } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-
+import logo from "@/assets/logo.webp";
+import Image from "next/image";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { Spinner } from "flowbite-react";
+import { FaSpinner } from "react-icons/fa6";
 const FileUpload: React.FC = () => {
+  const { data: sessionData, status } = useSession();
+
   const [file, setFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
+  const [loading, setLoading] = useState(false);
   const validateFile = (file: File) => {
     const validTypes = ["application/pdf"];
     const maxSize = 5242880; // 5 MB it is in bytes
@@ -32,7 +39,6 @@ const FileUpload: React.FC = () => {
       } else {
         setErrorMessage(null);
         setFile(selectedFile);
-        console.log(selectedFile);
       }
     }
   };
@@ -62,8 +68,25 @@ const FileUpload: React.FC = () => {
       } else {
         setErrorMessage(null);
         setFile(selectedFile);
-        console.log(selectedFile);
       }
+    }
+  };
+
+  const handleSubmitClick = async () => {
+    const formData = new FormData();
+    try {
+      if (file) {
+        setLoading(true);
+        formData.append("resume", file);
+        //@ts-ignore
+        formData.append("id", sessionData?.user?.id);
+        const response = await axios.post("/api/upload", formData);
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -77,6 +100,7 @@ const FileUpload: React.FC = () => {
             fixed 
             inset-0"
         />
+
         <Dialog.Content
           className="
             fixed 
@@ -104,10 +128,15 @@ const FileUpload: React.FC = () => {
             justify-center
             p-4
             focus:outline-none
+          
           "
         >
+          <div className="text-left w-full absolute top-3 left-8 flex gap-4 flex-col">
+            <Image src={logo} alt="logo" width={150} height={150} />
+            <p className="text-lg font-semibold">Upload Resume</p>
+          </div>
           <div
-            className={`border-2 border-dashed rounded-lg p-6 w-96 ${
+            className={`border-2 border-dashed rounded-lg p-6 w-96 my-14 ${
               dragActive ? "border-blue-500" : "border-gray-300"
             } relative z-20`}
             onDragOver={handleDragOver}
@@ -146,6 +175,12 @@ const FileUpload: React.FC = () => {
               {errorMessage && <p className="text-red-500">{errorMessage}</p>}
             </label>
           </div>
+          <button
+            className="bg-blue-500 flex justify-center items-center text-white px-3 py-2 rounded-lg min-w-[120px] absolute bottom-6 right-8"
+            onClick={handleSubmitClick}
+          >
+            {loading ? <FaSpinner className="animate-spin" /> : "Upload"}
+          </button>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

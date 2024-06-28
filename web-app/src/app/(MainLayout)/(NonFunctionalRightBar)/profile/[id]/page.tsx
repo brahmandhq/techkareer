@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import placeholder from "@/assets/placholder-jobseeker.webp";
 import Image from "next/image";
+
 // import { useUserInfo } from "@/hooks/useUser";
 import {
   ChevronRight,
@@ -17,8 +18,10 @@ import {
   SquareArrowOutUpRight,
 } from "lucide-react";
 import Link from "next/link";
-import { TbWorldWww } from "react-icons/tb";
+import { TbInnerShadowBottom, TbWorldWww } from "react-icons/tb";
 import { Skeleton } from "@/components/ui/skeleton";
+import FileUpload from "@/components/ui/Modal";
+import { useUserInfo } from "@/hooks/useUser";
 function ProfilePage({
   params,
 }: {
@@ -26,16 +29,24 @@ function ProfilePage({
     id: string;
   };
 }) {
-  const { data: sessionData, status } = useSession();
-  const user = sessionData?.user;
-  // const { user, loading, error } = useUserInfo(params.id);
-  // console.log("i am here", user);
+  const { user } = useUserInfo(params.id);
+
+  const [showModal, setShowModal] = React.useState(false);
+
+  useEffect(() => {
+    if (user) {
+      if (!user.resume) {
+        setShowModal(true);
+      }
+    }
+  }, [user]);
   if (!user) {
     return <></>;
   }
 
   return (
     <>
+      {showModal && <FileUpload />}
       <Navbar className="justify-start gap-5">
         {user.name ? user.name : getNameFromEmail(user.email || "")}
 
@@ -56,9 +67,6 @@ const ProfileCard = ({
   userInfo: any;
   loading: boolean;
 }) => {
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
   const socials = [
     {
       name: "Twitter",
@@ -111,61 +119,74 @@ const ProfileCard = ({
     );
   }
   return (
-    <div className=" w-full h-fit flex flex-col justify-center items-center  ">
-      <div className="flex justify-center items-center flex-col bg-gray-800/20 px-6 py-8 rounded-xl relative ">
-        {/* <div className="absolute right-3 top-3 text-gray-400 cursor-pointer">
+    <>
+      <div className=" w-[500px] h-fit flex flex-col justify-center items-center  ">
+        <div className="flex justify-center items-center flex-col bg-gray-800/20 px-6 py-8 rounded-xl relative ">
+          {/* <div className="absolute right-3 top-3 text-gray-400 cursor-pointer">
           <Link href={`/profile/edit/${userInfo.id}`}>
             <Edit />
           </Link>
         </div> */}
-        <div>
-          {userInfo?.image ? (
-            <img
-              src={userInfo.image}
-              width={100}
-              height={100}
-              alt=""
-              className="rounded-full"
-            />
-          ) : (
-            <Image src={placeholder} width={100} height={100} alt="" />
-          )}
-        </div>
-        <div className="flex justify-center items-center flex-col gap-6 ">
-          <h1 className="text-lg md:text-4xl mt-3 ">
-            {userInfo?.name ? userInfo.name : userInfo?.email}
-          </h1>
-          <div className="flex justify-center items-center gap-3 max-w-[375px] flex-wrap">
-            {/* {socials.map(
-              (social, index) =>
-                social.link && (
-                  <Link
-                    key={index}
-                    href={social.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <div
-                      className={`flex justify-center items-center gap-2 w-fit ${social.color} px-4 py-2  rounded-3xl`}
-                    >
-                      {social.icon}
-                      <p>{social.name}</p>
-                    </div>
-                  </Link>
-                )
-            )} */}
-          </div>
-          <div className="flex justify-start items-start w-full mt-6">
-            {userInfo?.description && (
-              <div className="flex justify-start items-center gap-5">
-                <p className="text-xl font-medium text-gray-300">About - </p>
-                <span className="text-gray-200">{userInfo?.description}</span>
-              </div>
+          <div>
+            {userInfo?.profilePic ? (
+              <img
+                src={userInfo.profilePic}
+                width={100}
+                height={100}
+                alt=""
+                className="rounded-full"
+              />
+            ) : (
+              <Image src={placeholder} width={100} height={100} alt="" />
             )}
+          </div>
+          <div className="flex justify-center items-center flex-col gap-6 ">
+            <h1 className="text-lg md:text-4xl mt-3 ">
+              {userInfo?.name ? userInfo.name : userInfo?.email}
+            </h1>
+            <div className="flex justify-center items-center gap-3 max-w-[375px] flex-wrap">
+              {socials.map(
+                (social, index) =>
+                  social.link && (
+                    <Link
+                      key={index}
+                      href={social.link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div
+                        className={`flex justify-center items-center gap-2 w-fit ${social.color} px-4 py-2  rounded-3xl`}
+                      >
+                        {social.icon}
+                        <p>{social.name}</p>
+                      </div>
+                    </Link>
+                  )
+              )}
+            </div>
+            <div className="flex justify-center items-center gap-3 max-w-[375px] flex-wrap"></div>
+            <div className="flex justify-start items-start  mt-6 w-full gap-3 flex-wrap">
+              <div className="flex justify-start items-start gap-5">
+                <p className="text-xl font-medium text-gray-300">SKills </p>
+                <p className="text-gray-200">
+                  {userInfo?.skills.map((social: any, index: any) => (
+                    <span>{social},{' '} </span>
+                  ))}
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-start items-start  mt-6 w-full">
+              {userInfo?.description && (
+                <div className="flex justify-start items-start gap-5">
+                  <p className="text-xl font-medium text-gray-300">About </p>
+                  <span className="text-gray-200">{userInfo?.description}</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default ProfilePage;

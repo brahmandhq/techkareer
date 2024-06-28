@@ -19,6 +19,12 @@ model User {
   name       String?
   email      String  @unique
   profilePic String?
+  resume     String?
+  skills    String[]
+  github    String?
+  linkedin  String?
+  twitter   String?
+  description String?
 }
 
 model Opportunity {
