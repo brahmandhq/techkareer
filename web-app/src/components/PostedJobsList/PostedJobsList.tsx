@@ -20,7 +20,6 @@ function PostedJobsList() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        console.log("Fetching jobs at:", new Date().toLocaleTimeString());
         const response = await fetch('/api/opportunities', {
           cache: 'force-cache'
         });
