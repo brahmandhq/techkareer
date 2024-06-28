@@ -1,21 +1,24 @@
-"use client";
+"use client"
 
-import React, { useEffect, useState } from "react";
-import { JobCard } from "../components";
-import Loader from "../ui/Loader";
-import { Opportunity } from "@/types/type";
-import { Button } from "../ui/button";
-import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import React, { useEffect, useState } from "react"
+import { JobCard } from "../components"
+import Loader from "../ui/Loader"
+import { Opportunity } from "@/types/type"
+import { Button } from "../ui/button"
+import Link from "next/link"
+import { useSession } from "next-auth/react"
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer"
+import { useMediaQuery } from "@/hooks/use-media-query"
+
+import Image from "next/image"
+import { organizationPlaceHolder } from "@/assets/assets"
 
 function PostedJobsList() {
-  const { data: session } = useSession();
-  const [jobs, setJobs] = useState<Opportunity[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedJob, setSelectedJob] = useState<Opportunity | null>(null);
-  const isMobile = useMediaQuery("(max-width: 640px)");
+  const { data: session } = useSession()
+  const [jobs, setJobs] = useState<Opportunity[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [selectedJob, setSelectedJob] = useState<Opportunity | null>(null)
+  const isMobile = useMediaQuery("(max-width: 640px)")
 
   useEffect(() => {
     async function fetchJobs() {
@@ -24,10 +27,11 @@ function PostedJobsList() {
           cache: 'force-cache'
         });
         if (!response.ok) throw new Error('Failed to fetch')
+
         const data = await response.json()
         setJobs(data)
       } catch (error) {
-        console.error('Error fetching jobs:', error)
+        console.error("Error fetching jobs:", error)
       } finally {
         setIsLoading(false)
       }
@@ -39,7 +43,7 @@ function PostedJobsList() {
     return () => clearInterval(intervalId);
   }, [])
 
- /* if (!session) {
+  /* if (!session) {
     return (
       <main className="flex h-full w-full flex-col items-center justify-center">
         <h3 className="text-2xl font-medium text-violet-400 sm:text-3xl md:text-4xl lg:text-5xl mb-5">
@@ -68,36 +72,37 @@ function PostedJobsList() {
         </div>
       ) : (
         <>
-          <div className="flex sm:flex-row flex-col h-full w-full">
-            <div className="w-full sm:w-[45%] border-r border-gray-300 overflow-y-auto">
-              {jobs && jobs.map((job) => (
-                isMobile ? (
-                  <Drawer key={job.jobId}>
-                    <DrawerTrigger asChild>
-                      <div>
-                        <JobCard
-                          job={job}
-                          isSelected={selectedJob?.jobId === job.jobId}
-                          onClick={() => setSelectedJob(job)}
-                        />
-                      </div>
-                    </DrawerTrigger>
-                    <DrawerContent>
-                      <JobDetails job={job} />
-                    </DrawerContent>
-                  </Drawer>
-                ) : (
-                  <JobCard
-                    key={job.jobId}
-                    job={job}
-                    isSelected={selectedJob?.jobId === job.jobId}
-                    onClick={() => setSelectedJob(job)}
-                  />
-                )
-              ))}
+          <div className="flex h-full w-full flex-col sm:flex-row">
+            <div className="w-full overflow-y-auto border-r border-gray-300 sm:w-[45%]">
+              {jobs &&
+                jobs.map((job) =>
+                  isMobile ? (
+                    <Drawer key={job.jobId}>
+                      <DrawerTrigger asChild>
+                        <div>
+                          <JobCard
+                            job={job}
+                            isSelected={selectedJob?.jobId === job.jobId}
+                            onClick={() => setSelectedJob(job)}
+                          />
+                        </div>
+                      </DrawerTrigger>
+                      <DrawerContent>
+                        <JobDetails job={job} />
+                      </DrawerContent>
+                    </Drawer>
+                  ) : (
+                    <JobCard
+                      key={job.jobId}
+                      job={job}
+                      isSelected={selectedJob?.jobId === job.jobId}
+                      onClick={() => setSelectedJob(job)}
+                    />
+                  ),
+                )}
             </div>
             {!isMobile && (
-              <div className="hidden sm:block w-[55%] overflow-y-auto p-6">
+              <div className="hidden w-[55%] overflow-y-auto p-6 sm:block">
                 {selectedJob ? (
                   <JobDetails job={selectedJob} />
                 ) : (
@@ -109,29 +114,54 @@ function PostedJobsList() {
         </>
       )}
     </>
-  );
+  )
 }
 
-export default PostedJobsList;
+export default PostedJobsList
 
 function JobDetails({ job }: { job: Opportunity }) {
   return (
     <div className="p-6">
-      <img
+      {/* <img
         src={job.companyLogo}
         className="w-12 h-12 rounded-full"
         alt=""
         style={{
           filter: job.invertCompanyLogo ? "invert(100%)" : "",
         }}
-      />
-      <h2 className="text-2xl font-bold mb-4">{job.role}</h2>
-      <p className="text-lg mb-2">{job.companyName}</p>
-      <p className="text-gray-600 mb-4">{job.location}</p>
+      /> */}
+      <div className="logo-container relative h-[4rem] w-[4rem] overflow-hidden">
+        {job.companyLogo ? (
+          <img
+            src={job.companyLogo}
+            className="absolute w-full rounded-full"
+            alt=""
+            width={50}
+            // height={50}
+            style={{
+              filter: job.invertCompanyLogo ? "invert(100%)" : "",
+            }}
+          />
+        ) : (
+          <Image
+            src={organizationPlaceHolder}
+            className="h-full w-full rounded-full"
+            alt=""
+            width={50}
+            height={50}
+          />
+        )}
+      </div>
+      <h2 className="mb-4 mt-2 text-2xl font-bold">{job.role}</h2>
+      <p className="mb-2 text-lg">{job.companyName}</p>
+      <p className="mb-4 text-gray-600">{job.location}</p>
 
       <h3 className="text-xl font-semibold mb-2">About the job</h3>
       <p>Project Role: {job.role}</p>
-      <p>Project Role Description: Design, build and configure applications to meet business process and application requirements.</p>
+      <p>
+        Project Role Description: Design, build and configure applications to
+        meet business process and application requirements.
+      </p>
 
       <h3 className="text-xl font-semibold mt-4 mb-2">Required Skills</h3>
       <p>Must have skills: [List skills here]</p>
@@ -139,20 +169,23 @@ function JobDetails({ job }: { job: Opportunity }) {
       <h3 className="text-xl font-semibold mt-4 mb-2">Experience</h3>
       <p>Minimum 2 Year(s) Of Experience Is Required</p>
 
-      <div className="flex space-x-4 mt-4">
-        <Link href={`https://airtable.com/appX3kHVPitSufv76/shrwapikBLgGoQcLD?prefill_Job ID=${job.jobId}`} target="_blank">
+      <div className="mt-4 flex space-x-4">
+        <Link
+          href={`https://airtable.com/appX3kHVPitSufv76/shrwapikBLgGoQcLD?prefill_Job ID=${job.jobId}`}
+          target="_blank"
+        >
           <Button variant="secondary" className="flex items-center space-x-2">
-            <ExternalLinkIcon className="w-4 h-4" />
+            <ExternalLinkIcon className="h-4 w-4" />
             <span>Apply</span>
           </Button>
         </Link>
         <Button variant="secondary" className="flex items-center space-x-2">
-          <BookmarkIcon className="w-4 h-4" />
+          <BookmarkIcon className="h-4 w-4" />
           <span>Save</span>
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
 function BookmarkIcon(props: any) {
