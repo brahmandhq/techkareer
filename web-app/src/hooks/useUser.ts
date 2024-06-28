@@ -1,42 +1,42 @@
-"use client";
+"use client"
 
-import { useSession } from "next-auth/react";
-import axios from "axios";
+import { useSession } from "next-auth/react"
+import axios from "axios"
 
-import useSWR from "swr";
-import { useState } from "react";
+import useSWR from "swr"
+import { useState } from "react"
 
 export const useUser = () => {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession()
 
   if (status === "loading") {
-    return { status: "loading", user: null };
+    return { status: "loading", user: null }
   }
 
   if (status === "unauthenticated") {
-    return { status: false, user: null };
+    return { status: false, user: null }
   }
 
   return {
     status: true,
     user: session?.user || null,
-  };
-};
+  }
+}
 
 export const useUserInfo = (id: string) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   const { data: user, error } = useSWR(
     `/api/user/profile/${id}`,
     async (url: string) => {
-      const res = await axios.get(url);
-      setLoading(false);
-      return res.data.user;
-    }
-  );
+      const res = await axios.get(url)
+      setLoading(false)
+      return res.data.user
+    },
+  )
 
   return {
     user,
     loading: loading,
     error: error,
-  };
-};
+  }
+}

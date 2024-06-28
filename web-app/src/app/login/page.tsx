@@ -1,6 +1,6 @@
-"use client";
-import { BottomBar, LoginBox } from "@/components/components";
-import React from "react";
+"use client"
+import { BottomBar, LoginBox } from "@/components/components"
+import React from "react"
 
 function LoginPage() {
   return (
@@ -8,7 +8,7 @@ function LoginPage() {
       <LoginBox />
       <BottomBar />
     </>
-  );
+  )
 }
 
-export default LoginPage;
+export default LoginPage

@@ -1,11 +1,11 @@
-import React from "react";
-import AdvisorCard from "./ui/AdvisorCard";
+import React from "react"
+import AdvisorCard from "./ui/AdvisorCard"
 import {
   RAJESH_MULLAPPA_PHOTO,
   SACHIN_AGGARWAL_PHOTO,
   SHIVAM_BHATIA_PHOTO,
   SHUBHAM_KANODIA_PHOTO,
-} from "@/utils/constants";
+} from "@/utils/constants"
 
 const Advisors = () => {
   const advisors = [
@@ -33,14 +33,14 @@ const Advisors = () => {
       designation: "Machine Learning Engineer at Avalara",
       linkedin: "https://www.linkedin.com/in/shubham-kanodia123/",
     },
-  ];
+  ]
   return (
     <section className="py-12">
       <div className="container mx-auto">
-        <h2 className="text-xl sm:text-4xl font-bold text-center text-white mb-20">
+        <h2 className="mb-20 text-center text-xl font-bold text-white sm:text-4xl">
           Advisors
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
           {advisors.map((advisor, index) => (
             <AdvisorCard
               key={index}
@@ -53,7 +53,7 @@ const Advisors = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Advisors;
+export default Advisors

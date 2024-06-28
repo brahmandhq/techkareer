@@ -1,3 +1,3 @@
-import SearchSectionWrapper from "./SearchSectionWrapper";
+import SearchSectionWrapper from "./SearchSectionWrapper"
 
-export {SearchSectionWrapper}
+export { SearchSectionWrapper }

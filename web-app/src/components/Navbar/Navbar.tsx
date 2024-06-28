@@ -1,26 +1,26 @@
-import React from "react";
-import { cn } from "@/lib/utils";
+import React from "react"
+import { cn } from "@/lib/utils"
 function Navbar({
   children,
   className,
 }: {
-  children: React.ReactNode;
-  className?: string;
+  children: React.ReactNode
+  className?: string
 }) {
   return (
     <>
-      <div className="nav-section w-full flex justify-between items-center gap-5 h-[10vh] max-h-[10vh]">
+      <div className="nav-section flex h-[10vh] max-h-[10vh] w-full items-center justify-between gap-5">
         <div
           className={cn(
-            "w-full   flex justify-between items-center text-[16px]",
-            className
+            "flex w-full items-center justify-between text-[16px]",
+            className,
           )}
         >
           {children}
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

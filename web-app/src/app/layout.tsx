@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import Head from "next/head";
-import "./globals.css";
-import Providers from "./Providers";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import type { Metadata } from "next"
+import Head from "next/head"
+import "./globals.css"
+import Providers from "./Providers"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 export const metadata: Metadata = {
   title: "Techkareer | The only app you need for hiring",
@@ -28,12 +28,12 @@ export const metadata: Metadata = {
     creator: "@itsharshag",
     images: ["https://www.techkareer.com/og.png"],
   },
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
@@ -56,5 +56,5 @@ export default function RootLayout({
       </body>
       <GoogleAnalytics gaId="G-89FV5R6QSB" />
     </html>
-  );
+  )
 }

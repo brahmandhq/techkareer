@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,400,500,600,700,800,900&display=swap');
+
+* {
+    font-family: "Inter", sans-serif;
+}
+
+.heading-blue {
+    color: rgb(142, 150, 247);
+    font-weight: 900;
+}
+
+.text-blue {
+    color: #FFFF;
+}
+
+body {
+    background-color: #050813;
+}
+
+.bg-custom {
+    background-color: #060a17;
+    border: 0px;
+
+    box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.119);
+}
+
+#card1 {
+    transition: 0.5s ease-out;
+    cursor: pointer;
+}
+
+#card1:hover {
+    margin-top: -10px;
+    transition: margin-top .5s ease-in-out;
+}
+
+#card2 {
+    transition: 0.5s ease-out;
+    cursor: pointer;
+}
+
+#card2:hover {
+    margin-top: -10px;
+    transition: margin-top .5s ease-in-out;
+}
+
+#card3 {
+    transition: 0.5s ease-out;
+    cursor: pointer;
+}
+
+#card3:hover {
+    margin-top: -10px;
+    transition: margin-top .5s ease-in-out;
+}
+
+#card4 {
+    transition: 0.5s ease-out;
+    cursor: pointer;
+}
+
+#card4:hover {
+    margin-top: -10px;
+    transition: margin-top .5s ease-in-out;
+}
+
+.faq {
+    padding: 40px;
+}

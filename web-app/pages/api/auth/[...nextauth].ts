@@ -1,29 +1,29 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import GithubProvider from "next-auth/providers/github";
+import NextAuth from "next-auth"
+import GoogleProvider from "next-auth/providers/google"
+import GithubProvider from "next-auth/providers/github"
 
-import { db } from "@/lib/db";
+import { db } from "@/lib/db"
 
-const prisma = db;
+const prisma = db
 
 const getUserId = async ({
   email,
   name,
   picture,
 }: {
-  email: string;
-  name: string;
-  picture: string;
+  email: string
+  name: string
+  picture: string
 }) => {
-  let userId;
-  let subId;
-  let subName;
+  let userId
+  let subId
+  let subName
 
   const user = await prisma.user.findFirst({
     where: {
       email,
     },
-  });
+  })
   if (!user) {
     const user = await prisma.user.create({
       data: {
@@ -31,14 +31,14 @@ const getUserId = async ({
         name,
         profilePic: picture,
       },
-    });
-    userId = user.id;
-    return { userId, subId, subName };
+    })
+    userId = user.id
+    return { userId, subId, subName }
   }
 
-  userId = user.id;
-  return { userId, subId, subName };
-};
+  userId = user.id
+  return { userId, subId, subName }
+}
 
 export default NextAuth({
   providers: [
@@ -61,26 +61,26 @@ export default NextAuth({
   },
   callbacks: {
     redirect() {
-      return "/opportunities";
+      return "/opportunities"
     },
     async jwt({ token, account }) {
-      const { email, name, picture }: any = token;
+      const { email, name, picture }: any = token
 
       const { userId, subId, subName } = await getUserId({
         email,
         name,
         picture,
-      });
-      token = { ...token, ...{ userId, subId, subName } };
+      })
+      token = { ...token, ...{ userId, subId, subName } }
 
       if (account) {
-        token.accessToken = account.access_token;
+        token.accessToken = account.access_token
       }
 
-      return token;
+      return token
     },
     async session({ session, token }) {
-      console.log({ token });
+      console.log({ token })
       return {
         ...session,
         user: {
@@ -89,7 +89,7 @@ export default NextAuth({
           subId: token.subId,
           subName: token.subName,
         },
-      };
+      }
     },
   },
-});
+})

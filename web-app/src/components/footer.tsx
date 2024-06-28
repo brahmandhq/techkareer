@@ -1,12 +1,12 @@
-import { Linkedin, Twitter } from "lucide-react";
-import { SectionWrapper } from "./section-wrapper";
-import Image from "next/image";
-import Link from "next/link";
-import textLogo from "@/assets/techkareer(2).webp";
+import { Linkedin, Twitter } from "lucide-react"
+import { SectionWrapper } from "./section-wrapper"
+import Image from "next/image"
+import Link from "next/link"
+import textLogo from "@/assets/techkareer(2).webp"
 export const Footer = () => {
   return (
     <SectionWrapper>
-      <footer className="border-t-[1px] border-solid border-white/80 flex justify-center items-center pt-12 flex-col ">
+      <footer className="flex flex-col items-center justify-center border-t-[1px] border-solid border-white/80 pt-12">
         <Image
           src={textLogo}
           alt="Techkareer"
@@ -14,7 +14,7 @@ export const Footer = () => {
           height={200}
           className="mb-8"
         />
-        <div className="flex flex-row gap-6 mb-5">
+        <div className="mb-5 flex flex-row gap-6">
           <Link href="https://twitter.com/_techkareer">
             <Twitter size={30} fill="white" />
           </Link>
@@ -22,7 +22,7 @@ export const Footer = () => {
             <Linkedin size={30} />
           </Link>
         </div>
-        <p className="text-sm text-gray-200/60 mb-5">
+        <p className="mb-5 text-sm text-gray-200/60">
           © 2024 Techkareer. All rights reserved.
         </p>
         <div className="flex gap-5">
@@ -35,5 +35,5 @@ export const Footer = () => {
         </div>
       </footer>
     </SectionWrapper>
-  );
-};
+  )
+}

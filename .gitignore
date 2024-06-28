@@ -3,3 +3,4 @@ node_modules/
 .vscode
 .next
 .husky
+package.lock.json

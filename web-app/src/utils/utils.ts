@@ -7,14 +7,14 @@
 // }
 
 export function formatTimestampToDDMonthYYYY(timestamp: string): string {
-  const date = new Date(timestamp);
+  const date = new Date(timestamp)
   const options: Intl.DateTimeFormatOptions = {
     day: "2-digit",
     month: "long",
     year: "numeric",
-  };
-  const formattedDate: string = date.toLocaleDateString("en-US", options);
-  return formattedDate;
+  }
+  const formattedDate: string = date.toLocaleDateString("en-US", options)
+  return formattedDate
 }
 
 // export function shuffle(array: any) {
@@ -26,5 +26,5 @@ export function formatTimestampToDDMonthYYYY(timestamp: string): string {
 // }
 
 export function getNameFromEmail(email: string) {
-  return email.split("@")[0];
+  return email.split("@")[0]
 }

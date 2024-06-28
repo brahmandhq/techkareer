@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 
 export default function PrivacyPolicy() {
   return (
     <div className="m-auto w-9/12 p-20 text-justify">
       <div className="my-4">
-        <p className=" text-center text-3xl font-semibold">
+        <p className="text-center text-3xl font-semibold">
           Privacy Policy for TechKareer
         </p>
       </div>
@@ -233,5 +233,5 @@ export default function PrivacyPolicy() {
         to promptly remove such information from our records.
       </p>
     </div>
-  );
+  )
 }

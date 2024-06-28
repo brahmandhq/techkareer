@@ -26,6 +26,7 @@ type Opportunity = {
   updatedAt: string;
 };
 
+
 export const Opportunities = () => {
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -101,6 +102,7 @@ export const Opportunities = () => {
               <OpportunitiesCard key={item.id} {...item} />
             ))
           )}
+
         </div>
       </div>
     </SectionWrapper>
@@ -230,5 +232,5 @@ const OpportunitiesCard: React.FC<Opportunity> = ({
         </button>
       </Link>
     </div>
-  );
-};
+  )
+}
