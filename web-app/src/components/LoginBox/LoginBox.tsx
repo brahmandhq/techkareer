@@ -1,17 +1,17 @@
-"use client"
-import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import React, { useState } from "react"
-import logo from "@/assets/logo.webp"
-import { toast } from "react-toastify"
-import GoogleIcon from "@mui/icons-material/Google"
-import GitHubIcon from "@mui/icons-material/GitHub"
-import Link from "next/link"
+"use client";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import logo from "@/assets/logo.webp";
+import { toast } from "react-toastify";
+import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import Link from "next/link";
 
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,15 +19,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { loginSignupSchema } from "@/schema/form-schema"
-import { Loader } from "lucide-react"
-import Image from "next/image"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { loginSignupSchema } from "@/schema/form-schema";
+import { Loader } from "lucide-react";
+import Image from "next/image";
 
 function LoginBox() {
-  const router = useRouter()
-  const [loading, setLoading] = useState(false)
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof loginSignupSchema>>({
     resolver: zodResolver(loginSignupSchema),
@@ -35,27 +35,27 @@ function LoginBox() {
       email: "",
       password: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof loginSignupSchema>) {
     try {
-      setLoading(true)
+      setLoading(true);
 
       const signInData = await signIn("credentials", {
         email: values.email,
         password: values.password,
         redirect: false,
-      })
+      });
 
       if (signInData?.error) {
-        throw new Error("Incorrect Details")
+        throw new Error("Incorrect Details");
       }
-      toast.success("Onboarding Successful")
-      router.push("/")
+      toast.success("Onboarding Successful");
+      router.push("/");
     } catch (err: any) {
-      toast.error(err.message)
+      toast.error(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -63,7 +63,7 @@ function LoginBox() {
     <>
       <div className="md:justify-left flex h-screen flex-col justify-center break-words border-0 border-solid border-white leading-6 text-white md:flex-row">
         <div
-          className="login-left-side flex flex-1 flex-col break-words border-0 border-solid border-white bg-cover bg-no-repeat p-10 text-center max-sm:hidden md:flex-shrink md:text-left"
+          className="login-left-side max-sm:hidden flex flex-1 flex-col break-words border-0 border-solid border-white bg-cover bg-no-repeat p-10 text-center md:flex-shrink md:text-left"
           style={{
             backgroundImage: `url(/login.png)`,
             backgroundPosition: "center center",
@@ -73,7 +73,7 @@ function LoginBox() {
             <Link href="/">
               <div className="title-font mb-6 flex cursor-pointer items-center font-medium md:mb-0">
                 <Image
-                  className="w-40 cursor-pointer"
+                  className="cursor-pointer w-40"
                   src={logo}
                   alt="TechKareer"
                   onClick={() => router.push("/")}
@@ -107,7 +107,7 @@ function LoginBox() {
             <div>
               <center>
                 <button
-                  className="next-ui-gradient-btn mx-auto mb-3 w-9/12 rounded-xl"
+                  className="next-ui-gradient-btn mx-auto mb-3  w-9/12 rounded-xl"
                   color="gradient"
                   style={{ padding: "10px 24px" }}
                   onClick={() => signIn("google")}
@@ -210,7 +210,7 @@ function LoginBox() {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default LoginBox
+export default LoginBox;

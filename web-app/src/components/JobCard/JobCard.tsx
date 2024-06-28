@@ -1,59 +1,55 @@
-"use client"
-import { organizationPlaceHolder } from "@/assets/assets"
-import { Opportunity } from "@/types/type"
+"use client";
+import { organizationPlaceHolder } from "@/assets/assets";
+import { Opportunity } from "@/types/type";
 
-import React from "react"
+import React from "react";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
-function JobCard({
-  job,
-  isSelected,
-  onClick,
-}: {
-  job: Opportunity
-  isSelected: boolean
-  onClick: () => void
+function JobCard({ job, isSelected, onClick }: {
+  job: Opportunity;
+  isSelected: boolean;
+  onClick: () => void;
 }) {
-  const minAnnualPay: any = job?.minAnnualPay ? job?.minAnnualPay / 10 ** 5 : 0
-  const maxAnnualPay = job?.maxAnnualPay ? job?.maxAnnualPay / 10 ** 5 : 0
+  const minAnnualPay: any = job?.minAnnualPay ? job?.minAnnualPay / 10 ** 5 : 0;
+  const maxAnnualPay = job?.maxAnnualPay ? job?.maxAnnualPay / 10 ** 5 : 0;
 
   const minMonthlyPay: any = job?.minMonthlyPay
     ? job?.minMonthlyPay / 10 ** 3
-    : 0
-  const maxMonthlyPay = job?.maxMonthlyPay ? job?.maxMonthlyPay / 10 ** 3 : 0
+    : 0;
+  const maxMonthlyPay = job?.maxMonthlyPay ? job?.maxMonthlyPay / 10 ** 3 : 0;
 
   const constructPayText = () => {
-    let payText = ""
+    let payText = "";
 
     payText = minAnnualPay
       ? `${job.currency} ${minAnnualPay}-${maxAnnualPay} LPA per year`
-      : `${job.currency} ${minMonthlyPay}K-${maxMonthlyPay}K per month`
+      : `${job.currency} ${minMonthlyPay}K-${maxMonthlyPay}K per month`;
 
     if (minAnnualPay && minAnnualPay == maxAnnualPay) {
-      payText = `${job.currency} ${minAnnualPay} LPA per year`
+      payText = `${job.currency} ${minAnnualPay} LPA per year`;
     } else if (minMonthlyPay && minMonthlyPay == maxMonthlyPay) {
-      payText = `${job.currency} ${minMonthlyPay}K per month`
+      payText = `${job.currency} ${minMonthlyPay}K per month`;
     }
 
-    return payText
-  }
+    return payText;
+  };
 
-  const payText = constructPayText()
+  const payText = constructPayText();
 
   return (
     <div
-      className={`w-full cursor-pointer border-b border-zinc-800/50 p-4 ${isSelected ? "bg-zinc-700/20" : "hover:bg-zinc-700/20"}`}
+      className={`w-full border-b border-zinc-800/50 p-4 cursor-pointer ${isSelected ? 'bg-zinc-700/20' : 'hover:bg-zinc-700/20'}`}
       onClick={onClick}
     >
       <div className="flex items-start">
-        <div className="org-logo ms-1 mt-2 flex h-full justify-center">
-          <div className="logo-container relative h-[4rem] w-[4rem] overflow-hidden">
+        <div className="org-logo h-full flex justify-center mt-2 ms-1 ">
+          <div className="logo-container relative h-[4rem] w-[4rem] overflow-hidden ">
             {job.companyLogo ? (
               <img
                 src={job.companyLogo}
-                className="absolute w-full rounded-full"
+                className="w-full rounded-full absolute"
                 alt=""
                 width={50}
                 // height={50}
@@ -64,7 +60,7 @@ function JobCard({
             ) : (
               <Image
                 src={organizationPlaceHolder}
-                className="h-full w-full rounded-full"
+                className="h-full w-full rounded-full "
                 alt=""
                 width={50}
                 height={50}
@@ -72,28 +68,28 @@ function JobCard({
             )}
           </div>
         </div>
-        <div id="info" className="flex h-full flex-1 flex-col gap-[3px] ps-2">
-          <div className="title-sec flex w-full items-center gap-1 text-[14px]">
-            <div className="title font-900 text-[16px]">{job.role}</div>
+        <div id="info" className="flex flex-col h-full gap-[3px] ps-2 flex-1">
+          <div className="title-sec flex text-[14px] gap-1 items-center w-full ">
+            <div className="title text-[16px] font-900">{job.role}</div>
           </div>
-          <div className="job-location flex gap-2 text-[13px] text-[#868788]">
-            <div className="org-name word-wrap-overflow flex w-full text-[14px] text-[#868788]">
+          <div className="job-location flex text-[13px]   gap-2 text-[#868788]  ">
+            <div className="org-name w-full text-[14px] text-[#868788] word-wrap-overflow flex">
               {`${job.companyName}`}
             </div>
           </div>
-          <div className="about-job flex gap-2 text-[13px] text-[#868788]">
+          <div className="about-job flex text-[13px]   gap-2 text-[#868788]  ">
             💵 {payText}
           </div>
-          <div className="about-job flex gap-2 text-[13px] text-[#868788]">
+          <div className="about-job flex text-[13px]   gap-2 text-[#868788]  ">
             📍 {job.location}
           </div>
-          <div className="about-job flex gap-2 text-[13px] text-[#868788]">
+          <div className="about-job flex text-[13px]   gap-2 text-[#868788]  ">
             {job.durationInMonths ? `🕒 ${job.durationInMonths} months` : ""}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default JobCard
+export default JobCard;

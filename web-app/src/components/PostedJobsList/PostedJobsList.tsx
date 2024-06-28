@@ -23,8 +23,11 @@ function PostedJobsList() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await fetch("/api/opportunities")
-        if (!response.ok) throw new Error("Failed to fetch")
+        const response = await fetch('/api/opportunities', {
+          cache: 'force-cache'
+        });
+        if (!response.ok) throw new Error('Failed to fetch')
+
         const data = await response.json()
         setJobs(data)
       } catch (error) {
@@ -33,8 +36,11 @@ function PostedJobsList() {
         setIsLoading(false)
       }
     }
+    fetchJobs();
 
-    fetchJobs()
+    const intervalId = setInterval(fetchJobs, 60000);
+
+    return () => clearInterval(intervalId);
   }, [])
 
   /* if (!session) {
@@ -150,7 +156,7 @@ function JobDetails({ job }: { job: Opportunity }) {
       <p className="mb-2 text-lg">{job.companyName}</p>
       <p className="mb-4 text-gray-600">{job.location}</p>
 
-      {/* <h3 className="text-xl font-semibold mb-2">About the job</h3>
+      <h3 className="text-xl font-semibold mb-2">About the job</h3>
       <p>Project Role: {job.role}</p>
       <p>
         Project Role Description: Design, build and configure applications to
@@ -161,7 +167,7 @@ function JobDetails({ job }: { job: Opportunity }) {
       <p>Must have skills: [List skills here]</p>
 
       <h3 className="text-xl font-semibold mt-4 mb-2">Experience</h3>
-      <p>Minimum 2 Year(s) Of Experience Is Required</p> */}
+      <p>Minimum 2 Year(s) Of Experience Is Required</p>
 
       <div className="mt-4 flex space-x-4">
         <Link

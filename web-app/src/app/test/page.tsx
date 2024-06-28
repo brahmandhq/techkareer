@@ -1,7 +1,7 @@
-import React from "react"
-import FileUpload from "@/components/ui/Modal"
+import React from "react";
+import FileUpload from "@/components/ui/Modal";
 const page = () => {
-  return <FileUpload />
-}
+  return <FileUpload />;
+};
 
-export default page
+export default page;

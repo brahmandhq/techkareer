@@ -1,11 +1,9 @@
-import React from "react"
+import React from "react";
 type SectionWrapperProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 export const SectionWrapper = ({ children }: SectionWrapperProps) => {
   return (
-    <section className="mb-18 mx-auto max-w-[1300px] px-4 py-16">
-      {children}
-    </section>
-  )
-}
+    <section className="mx-auto px-4 py-16 max-w-[1300px] mb-18">{children}</section>
+  );
+};

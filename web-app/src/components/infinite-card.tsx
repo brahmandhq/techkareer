@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { cn } from "@/lib/utils"
-import React, { useEffect, useRef } from "react"
-import Image from "next/image"
-import { StaticImageData } from "next/image"
+import { cn } from "@/lib/utils";
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import { StaticImageData } from "next/image";
 
 const scrollingStyles = `
 @keyframes scroll {
@@ -26,7 +26,7 @@ const scrollingStyles = `
 .scroller ul.paused {
   animation-play-state: paused;
 }
-`
+`;
 
 export const InfiniteMovingCards = ({
   items,
@@ -36,55 +36,48 @@ export const InfiniteMovingCards = ({
   className,
 }: {
   items: {
-    image: StaticImageData
-    name: string
-    role: string
-    des: string
-  }[]
-  direction?: "left" | "right"
-  speed?: "fast" | "normal" | "slow"
-  pauseOnHover?: boolean
-  className?: string
+    image: StaticImageData;
+    name: string;
+    role: string;
+    des: string;
+  }[];
+  direction?: "left" | "right";
+  speed?: "fast" | "normal" | "slow";
+  pauseOnHover?: boolean;
+  className?: string;
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const scrollerRef = useRef<HTMLUListElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    const container = containerRef.current
-    const scroller = scrollerRef.current
+    const container = containerRef.current;
+    const scroller = scrollerRef.current;
 
     if (container && scroller) {
-      const scrollerContent = Array.from(scroller.children)
+      const scrollerContent = Array.from(scroller.children);
 
       scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true)
-        scroller.appendChild(duplicatedItem)
-      })
+        const duplicatedItem = item.cloneNode(true);
+        scroller.appendChild(duplicatedItem);
+      });
 
-      container.style.setProperty(
-        "--animation-direction",
-        direction === "left" ? "forwards" : "reverse",
-      )
-      container.style.setProperty(
-        "--animation-duration",
-        speed === "fast" ? "20s" : speed === "slow" ? "40s" : "80s",
-      )
+      container.style.setProperty("--animation-direction", direction === "left" ? "forwards" : "reverse");
+      container.style.setProperty("--animation-duration", speed === "fast" ? "20s" : speed === "slow" ? "40s" : "80s");
     }
-  }, [direction, speed])
+  }, [direction, speed]);
 
   return (
     <div>
       <style>{scrollingStyles}</style>
-      <div ref={containerRef} className={cn("scroller", className)}>
+      <div
+        ref={containerRef}
+        className={cn("scroller", className)}
+      >
         <ul
           ref={scrollerRef}
-          className="flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4"
-          onMouseEnter={() =>
-            pauseOnHover && scrollerRef.current?.classList.add("paused")
-          }
-          onMouseLeave={() =>
-            pauseOnHover && scrollerRef.current?.classList.remove("paused")
-          }
+          className="flex min-w-full shrink-0 gap-4 py-4 w-max flex-nowrap"
+          onMouseEnter={() => pauseOnHover && scrollerRef.current?.classList.add('paused')}
+          onMouseLeave={() => pauseOnHover && scrollerRef.current?.classList.remove('paused')}
         >
           {items.map((item, idx) => (
             <TestimonialCard
@@ -98,15 +91,15 @@ export const InfiniteMovingCards = ({
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
 type TestimonialCardProps = {
-  image: StaticImageData
-  name: string
-  role: string
-  des: string
-}
+  image: StaticImageData;
+  name: string;
+  role: string;
+  des: string;
+};
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
   name,
@@ -114,14 +107,14 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   des,
 }) => {
   return (
-    <div className="flex max-w-[700px] items-center justify-start gap-5 bg-transparent p-4">
+    <div className="bg-transparent p-4 flex max-w-[700px] justify-start items-center gap-5">
       <div>
         <Image
           src={image}
           alt={name}
           width={60}
           height={60}
-          className="min-h-[60px] min-w-[60px] rounded-full"
+          className="rounded-full min-w-[60px] min-h-[60px]"
         />
       </div>
 
@@ -131,5 +124,5 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <h5 className="mt-1 text-sm font-light opacity-70">{des}</h5>
       </div>
     </div>
-  )
-}
+  );
+};
