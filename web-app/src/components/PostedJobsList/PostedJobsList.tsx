@@ -20,7 +20,10 @@ function PostedJobsList() {
   useEffect(() => {
     async function fetchJobs() {
       try {
-        const response = await fetch('/api/opportunities')
+        console.log("Fetching jobs at:", new Date().toLocaleTimeString());
+        const response = await fetch('/api/opportunities', {
+          cache: 'force-cache'
+        });
         if (!response.ok) throw new Error('Failed to fetch')
         const data = await response.json()
         setJobs(data)
@@ -30,10 +33,12 @@ function PostedJobsList() {
         setIsLoading(false)
       }
     }
+    fetchJobs();
 
-    fetchJobs()
+    const intervalId = setInterval(fetchJobs, 60000);
+
+    return () => clearInterval(intervalId);
   }, [])
-
 
  /* if (!session) {
     return (

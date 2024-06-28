@@ -1,4 +1,14 @@
 -- CreateTable
+CREATE TABLE "User" (
+    "id" UUID NOT NULL,
+    "name" TEXT,
+    "email" TEXT NOT NULL,
+    "profilePic" TEXT,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Opportunity" (
     "id" SERIAL NOT NULL,
     "role" TEXT NOT NULL,
@@ -20,4 +30,4 @@ CREATE TABLE "Opportunity" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Opportunity_jobId_key" ON "Opportunity"("jobId");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
