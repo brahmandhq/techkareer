@@ -156,7 +156,7 @@ function JobDetails({ job }: { job: Opportunity }) {
       <p className="mb-2 text-lg">{job.companyName}</p>
       <p className="mb-4 text-gray-600">{job.location}</p>
 
-      {/* <h3 className="text-xl font-semibold mb-2">About the job</h3>
+      <h3 className="text-xl font-semibold mb-2">About the job</h3>
       <p>Project Role: {job.role}</p>
       <p>
         Project Role Description: Design, build and configure applications to
@@ -167,7 +167,7 @@ function JobDetails({ job }: { job: Opportunity }) {
       <p>Must have skills: [List skills here]</p>
 
       <h3 className="text-xl font-semibold mt-4 mb-2">Experience</h3>
-      <p>Minimum 2 Year(s) Of Experience Is Required</p> */}
+      <p>Minimum 2 Year(s) Of Experience Is Required</p>
 
       <div className="mt-4 flex space-x-4">
         <Link

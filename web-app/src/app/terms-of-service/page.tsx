@@ -1,5 +1,5 @@
 export default function TermsOfService() {
-  const heading = "Website Terms and Conditions of Use"
+  const heading = "Website Terms and Conditions of Use";
 
   return (
     <div className="m-auto w-9/12 p-20 text-justify">
@@ -123,5 +123,5 @@ export default function TermsOfService() {
         laws of in without regards to its conflict of law provisions.
       </p>
     </div>
-  )
+  );
 }

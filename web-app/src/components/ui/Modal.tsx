@@ -1,80 +1,113 @@
-"use client"
-import React, { useState, ChangeEvent, DragEvent } from "react"
-import * as Dialog from "@radix-ui/react-dialog"
+"use client";
+import React, { useState, ChangeEvent, DragEvent } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 
 const FileUpload: React.FC = () => {
-  const [file, setFile] = useState<File | null>(null)
-  const [dragActive, setDragActive] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [file, setFile] = useState<File | null>(null);
+  const [dragActive, setDragActive] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateFile = (file: File) => {
-    const validTypes = ["application/pdf"]
-    const maxSize = 5242880 // 5 MB it is in bytes
+    const validTypes = ["application/pdf"];
+    const maxSize = 5242880; // 5 MB it is in bytes
 
     if (!validTypes.includes(file.type)) {
-      return "Only PDF files are allowed."
+      return "Only PDF files are allowed.";
     }
 
     if (file.size > maxSize) {
-      return "File size should not exceed 5 MB."
+      return "File size should not exceed 5 MB.";
     }
 
-    return null
-  }
+    return null;
+  };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
-      const selectedFile = event.target.files[0]
-      const validationError = validateFile(selectedFile)
+      const selectedFile = event.target.files[0];
+      const validationError = validateFile(selectedFile);
       if (validationError) {
-        setErrorMessage(validationError)
-        setFile(null)
+        setErrorMessage(validationError);
+        setFile(null);
       } else {
-        setErrorMessage(null)
-        setFile(selectedFile)
-        console.log(selectedFile)
+        setErrorMessage(null);
+        setFile(selectedFile);
+        console.log(selectedFile);
       }
     }
-  }
+  };
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-    setDragActive(true)
-  }
+    event.preventDefault();
+    event.stopPropagation();
+    setDragActive(true);
+  };
 
   const handleDragLeave = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-    setDragActive(false)
-  }
+    event.preventDefault();
+    event.stopPropagation();
+    setDragActive(false);
+  };
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault()
-    event.stopPropagation()
-    setDragActive(false)
+    event.preventDefault();
+    event.stopPropagation();
+    setDragActive(false);
     if (event.dataTransfer.files && event.dataTransfer.files[0]) {
-      const selectedFile = event.dataTransfer.files[0]
-      const validationError = validateFile(selectedFile)
+      const selectedFile = event.dataTransfer.files[0];
+      const validationError = validateFile(selectedFile);
       if (validationError) {
-        setErrorMessage(validationError)
-        setFile(null)
+        setErrorMessage(validationError);
+        setFile(null);
       } else {
-        setErrorMessage(null)
-        setFile(selectedFile)
-        console.log(selectedFile)
+        setErrorMessage(null);
+        setFile(selectedFile);
+        console.log(selectedFile);
       }
     }
-  }
+  };
 
   return (
     <Dialog.Root defaultOpen={true} open={true}>
       <Dialog.Trigger />
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-neutral-900/90 backdrop-blur-sm" />
-        <Dialog.Content className="fixed left-[50%] top-[50%] flex h-[50vh] max-h-full w-[80vw] translate-x-[-50%] translate-y-[-50%] flex-col items-center justify-center rounded-md border border-neutral-700 bg-neutral-800 p-4 drop-shadow-md focus:outline-none md:h-auto md:max-h-[85vh] md:w-[90vw] md:max-w-[450px] md:px-[62px] md:py-[48px]">
+        <Dialog.Overlay
+          className=" bg-neutral-900/90 
+            backdrop-blur-sm 
+            fixed 
+            inset-0"
+        />
+        <Dialog.Content
+          className="
+            fixed 
+            drop-shadow-md 
+            border 
+            border-neutral-700 
+            top-[50%] 
+            left-[50%] 
+            max-h-full 
+            h-[50vh]
+            md:h-auto 
+            md:max-h-[85vh] 
+            w-[80vw]
+            md:w-[90vw] 
+            md:max-w-[450px] 
+            translate-x-[-50%] 
+            translate-y-[-50%] 
+            rounded-md 
+            bg-neutral-800 
+            md:py-[48px] 
+            md:px-[62px]
+            flex
+            flex-col
+            items-center
+            justify-center
+            p-4
+            focus:outline-none
+          "
+        >
           <div
-            className={`w-96 rounded-lg border-2 border-dashed p-6 ${
+            className={`border-2 border-dashed rounded-lg p-6 w-96 ${
               dragActive ? "border-blue-500" : "border-gray-300"
             } relative z-20`}
             onDragOver={handleDragOver}
@@ -89,10 +122,10 @@ const FileUpload: React.FC = () => {
             />
             <label
               htmlFor="fileUploadInput"
-              className="flex h-full cursor-pointer flex-col items-center justify-center"
+              className="flex flex-col items-center justify-center h-full cursor-pointer"
             >
               <svg
-                className="mb-3 h-12 w-12 text-gray-400"
+                className="w-12 h-12 mb-3 text-gray-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -116,7 +149,7 @@ const FileUpload: React.FC = () => {
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
-  )
-}
+  );
+};
 
-export default FileUpload
+export default FileUpload;

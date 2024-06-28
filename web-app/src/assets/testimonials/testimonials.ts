@@ -3,18 +3,18 @@
 // import test3 from "./test3.webp";
 // import test4 from "./test4.webp";
 // import test5 from "./test5.webp";
-import paras from "./paras.jpeg"
-import ayush from "./ayush.jpeg"
-import saket from "./saket.jpeg"
+import paras from "./paras.jpeg";
+import ayush from "./ayush.jpeg";
+import saket from "./saket.jpeg";
 
-import { StaticImageData } from "next/image"
+import { StaticImageData } from "next/image";
 
 type testimonialsProp = {
-  image: StaticImageData
-  name: string
-  role: string
-  des: string
-}
+  image: StaticImageData;
+  name: string;
+  role: string;
+  des: string;
+};
 
 const testimonials: testimonialsProp[] = [
   {
@@ -45,6 +45,6 @@ const testimonials: testimonialsProp[] = [
   //     role: "Manager",
   //     des: "Love to hire",
   //   },
-]
+];
 
-export default testimonials
+export default testimonials;

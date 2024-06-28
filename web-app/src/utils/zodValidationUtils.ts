@@ -1,4 +1,4 @@
-import * as z from "zod"
+import * as z from "zod";
 export const organizationSchema = z.object({
   email: z
     .string({ required_error: "Email is must" })
@@ -18,7 +18,7 @@ export const organizationSchema = z.object({
   foundedAt: z
     .string({ required_error: "Founded is must" })
     .min(1, { message: "Founded date is required" }),
-})
+});
 
 export const jobSeekerSchema = z.object({
   email: z
@@ -36,7 +36,7 @@ export const jobSeekerSchema = z.object({
     .min(2, { message: "Last name must be at least 2 characters long" }),
   description: z.string({ required_error: "Description is required" }),
   phoneNumber: z.string({ required_error: "Phone number is required" }),
-})
+});
 
 export const JobProfileSchema = z.object({
   role: z.string({ required_error: "Role is required" }),
@@ -51,11 +51,11 @@ export const JobProfileSchema = z.object({
   skillsRequired: z.array(z.string(), {
     required_error: "Skills are required",
   }),
-})
+});
 
 export const ProjectSchema = z.object({
   name: z.string().min(1).max(255),
   description: z.string(),
   deployedLink: z.string().optional(),
   repoLink: z.string().optional(),
-})
+});

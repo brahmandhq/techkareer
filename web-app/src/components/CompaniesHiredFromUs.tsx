@@ -3,9 +3,9 @@ import {
   CODEMATE_AI_LOGO,
   SHRAM_IO_LOGO,
   SLASHBASE_LOGO,
-} from "@/utils/constants"
-import Image from "next/image"
-import React from "react"
+} from "@/utils/constants";
+import Image from "next/image";
+import React from "react";
 
 const CompaniesHiredFromUs = () => {
   const hiredCompanies = [
@@ -35,20 +35,20 @@ const CompaniesHiredFromUs = () => {
       logo: "",
       description: "",
     },
-  ]
+  ];
 
   return (
     <div>
-      <section className="py-12">
+      <section className=" py-12">
         <div className="container mx-auto">
-          <h2 className="mb-20 text-center text-xl font-bold text-white sm:text-3xl">
+          <h2 className="text-xl sm:text-3xl font-bold text-center text-white mb-20">
             Companies That Have Hired From Us
           </h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {hiredCompanies.map((company, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center rounded-lg p-6 antialiased shadow-md"
+                className="antialiased p-6 rounded-lg shadow-md flex flex-col items-center"
                 style={{
                   background:
                     "linear-gradient(180deg, var(--slate-800), var(--slate-900)",
@@ -66,12 +66,12 @@ const CompaniesHiredFromUs = () => {
                       />
                     </div>
                   )}
-                  <h3 className="mb-2 text-lg font-semibold text-white sm:text-xl">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2 ">
                     {company.name}
                   </h3>
                 </div>
 
-                <p className="text-md mt-4 text-center text-white sm:text-lg">
+                <p className="text-white text-md sm:text-lg text-center mt-4">
                   {company.description}
                 </p>
               </div>
@@ -80,7 +80,7 @@ const CompaniesHiredFromUs = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default CompaniesHiredFromUs
+export default CompaniesHiredFromUs;
