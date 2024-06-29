@@ -5,7 +5,6 @@ import { getNameFromEmail } from "@/utils/utils";
 import { useSession } from "next-auth/react";
 import React, { useEffect } from "react";
 import placeholder from "@/assets/placholder-jobseeker.webp";
-import Image from "next/image";
 // import { useUserInfo } from "@/hooks/useUser";
 import {
   ChevronRight,
@@ -128,7 +127,12 @@ const ProfileCard = ({
               className="rounded-full"
             />
           ) : (
-            <Image src={placeholder} width={100} height={100} alt="" />
+            <img
+              src={"../placeholder-jobseeker.webp"}
+              width={100}
+              height={100}
+              alt=""
+            />
           )}
         </div>
         <div className="flex justify-center items-center flex-col gap-6 ">

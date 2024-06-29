@@ -85,8 +85,8 @@ const OppurtunitiesCard: React.FC<oppurtunitiesCardProps> = ({
       className="rounded-2xl p-4 w-[340px] md:min-w-[390px] lg:max-w-[420px] lg:min-w-[390px] min-h-[501px]   flex flex-col gap-4 justify-evenly"
     >
       <div className="flex justify-start items-center gap-2">
-        <Image
-          src={logo}
+        <img
+          src={"/logo.webp"}
           alt="logo"
           height={40}
           width={40}

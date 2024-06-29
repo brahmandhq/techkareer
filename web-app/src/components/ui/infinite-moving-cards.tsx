@@ -89,7 +89,6 @@ export const InfiniteMovingCards = ({
         )}
       >
         {items.map((item, idx) => (
-          
           <li
             className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-700 px-8 py-6 md:w-[450px]"
             style={{
@@ -99,13 +98,13 @@ export const InfiniteMovingCards = ({
             key={item.name}
           >
             <blockquote>
-              <Image
-              className="mb-4 rounded-full text-white text-sm"
-              width={100}
-              height={100}
-              src={item.photo}
-              alt={item.name}
-            />
+              <img
+                className="mb-4 rounded-full text-white text-sm"
+                width={100}
+                height={100}
+                src={item.photo}
+                alt={item.name}
+              />
               <div
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"

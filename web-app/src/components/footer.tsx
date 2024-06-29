@@ -1,14 +1,12 @@
 import { Linkedin, Twitter } from "lucide-react";
 import { SectionWrapper } from "./section-wrapper";
-import Image from "next/image";
 import Link from "next/link";
-import textLogo from "@/assets/techkareer(2).webp";
 export const Footer = () => {
   return (
     <SectionWrapper>
       <footer className="border-t-[1px] border-solid border-white/80 flex justify-center items-center pt-12 flex-col ">
-        <Image
-          src={textLogo}
+        <img
+          src={"/techkareer(2).webp"}
           alt="Techkareer"
           width={200}
           height={200}

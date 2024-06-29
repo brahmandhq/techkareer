@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { Job } from "@/lib/types";
@@ -9,27 +8,27 @@ const JobOpportunities = () => {
   const initialDisplayedJobs = 4;
   const [displayedJobs, setDisplayedJobs] = useState(initialDisplayedJobs);
   // modify Job types based on the airtable data
-  const [jobs, setJobs] = useState<Job[]>([])
-  const [loading, setLoading] = useState(true)
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await fetch('/api/get_job_opportunities');
+        const data = await fetch("/api/get_job_opportunities");
         const response = await data.json();
-        if ('error' in response) {
+        if ("error" in response) {
           throw new Error(response.error);
         }
         setJobs(response.jobsData);
       } catch (error) {
-        console.error('Error fetching job details:', error);
+        console.error("Error fetching job details:", error);
       } finally {
         setLoading(false);
       }
     }
     fetchData();
-  }, [])
+  }, []);
 
   const handleJobOpportunityClick = (jobId: String) => {
     router.push(`/jobs/${jobId}`);
@@ -77,7 +76,7 @@ const JobOpportunities = () => {
             >
               <div className="mb-6">
                 <div className="flex items-center gap-4">
-                  <Image
+                  <img
                     alt="company-logo"
                     src={require(`../public/images/${job.logo}`)}
                     height={50}

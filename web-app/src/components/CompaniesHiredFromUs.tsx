@@ -4,7 +4,6 @@ import {
   SHRAM_IO_LOGO,
   SLASHBASE_LOGO,
 } from "@/utils/constants";
-import Image from "next/image";
 import React from "react";
 
 const CompaniesHiredFromUs = () => {
@@ -57,7 +56,7 @@ const CompaniesHiredFromUs = () => {
                 <div className="flex items-center gap-4">
                   {company.logo && (
                     <div className="mb-2">
-                      <Image
+                      <img
                         alt="company-logo"
                         src={company.logo}
                         width={30}

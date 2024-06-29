@@ -1,16 +1,9 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-import logo from "@/assets/logo.webp";
-import { AiOutlineAppstoreAdd } from "react-icons/ai";
-import { FaEnvelopeCircleCheck } from "react-icons/fa6";
-import { HiOutlineBuildingOffice, HiOutlineUser } from "react-icons/hi2";
+import { HiOutlineUser } from "react-icons/hi2";
 import { IoIosLogOut } from "react-icons/io";
-import { IoPeopleOutline } from "react-icons/io5";
-import { PiHandshake, PiSuitcaseSimpleDuotone } from "react-icons/pi";
-import { CircleDollarSign } from "lucide-react";
+import { PiSuitcaseSimpleDuotone } from "react-icons/pi";
 import { getNameFromEmail } from "@/utils/utils";
 import Link from "next/link";
 
@@ -23,7 +16,7 @@ function Leftbar() {
       <>
         <div className="side-section  max-sm:hidden w-[20%] h-[100vh]  py-8 flex flex-col gap-10 px-2">
           <div className="logo-container flex w-full items-center justify-start">
-            <Image src={logo} alt="logo" width={150} height={150} />
+            <img src={"/logo.webp"} alt="logo" width={150} height={150} />
           </div>
           <div className=" cursor-pointer flex flex-col w-full">
             <Link
@@ -41,14 +34,13 @@ function Leftbar() {
                   href={`/profile/${authUser.user.id}`}
                   className=" hover:text-white cursor-pointer  rounded-lg  overflow-hidden hover:bg-gray-700/20   flex justify-start relative items-center gap-4 text-[16px] font-medium px-2 py-2 m-1 	truncate"
                 >
-                  <div className="profile-pic-container flex items-center justify-center  h-[20px] min-w-[20px] relative">
+                  <div className="profile-pic-container flex items-center justify-center  h-[20px] w-[20px] relative">
                     {authUser.user?.image ? (
-                      <Image
+                      <img
                         alt=""
-                        fill
-                        className=" object-fill rounded-full"
+                        className=" object-fill rounded-full "
                         src={authUser.user?.image}
-                      ></Image>
+                      ></img>
                     ) : (
                       <HiOutlineUser className=" cursor-pointer text-[19px] " />
                     )}

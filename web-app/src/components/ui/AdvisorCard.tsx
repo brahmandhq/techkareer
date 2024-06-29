@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -26,7 +25,7 @@ const AdvisorCard = ({
       target="_blank"
     >
       <div className="flex flex-col items-center">
-        <Image
+        <img
           className="mb-4 rounded-full text-white text-sm"
           width={100}
           height={100}

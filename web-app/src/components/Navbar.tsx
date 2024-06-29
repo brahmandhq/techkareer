@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/logo.webp";
-import Image from "next/image";
 import { Link as ReactLink } from "react-scroll";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
@@ -28,9 +26,9 @@ export const Navbar = () => {
         className="flex  justify-between items-center w-[1300px] md:px-6 md:ml-8 px-4 "
       >
         <div className="max-sm:w-[120px] w-[160px] md:w-[220px]">
-          <Image
+          <img
             className="cursor-pointer"
-            src={logo}
+            src={"/logo.webp"}
             alt="TechKareer"
             onClick={() => router.push("/")}
           />

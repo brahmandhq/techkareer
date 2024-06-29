@@ -2,28 +2,13 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import logo from "@/assets/logo.webp";
 import { toast } from "react-toastify";
 import GoogleIcon from "@mui/icons-material/Google";
-import GitHubIcon from "@mui/icons-material/GitHub";
 import Link from "next/link";
-
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { loginSignupSchema } from "@/schema/form-schema";
-import { Loader } from "lucide-react";
-import Image from "next/image";
 
 function LoginBox() {
   const router = useRouter();
@@ -72,9 +57,9 @@ function LoginBox() {
           <div className="flex justify-center text-center md:mb-36 md:block md:text-left">
             <Link href="/">
               <div className="title-font mb-6 flex cursor-pointer items-center font-medium md:mb-0">
-                <Image
+                <img
                   className="cursor-pointer w-40"
-                  src={logo}
+                  src={"/logo.webp"}
                   alt="TechKareer"
                   onClick={() => router.push("/")}
                 />
