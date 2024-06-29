@@ -57,7 +57,7 @@ function JobCard({
               />
             ) : (
               <img
-                src={"/organization-placeholder.webp"}
+                src={"/placeholder-organization.png"}
                 className="h-full w-full rounded-full"
                 alt=""
                 width={50}
