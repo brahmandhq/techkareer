@@ -13,19 +13,18 @@ import { useMediaQuery } from "@/hooks/use-media-query"
 import Image from "next/image"
 import { organizationPlaceHolder } from "@/assets/assets"
 
-function PostedJobsList() {
+function PostedJobsList({ initialOpportunities }: { initialOpportunities: Opportunity[] }) {
   const { data: session } = useSession()
-  const [jobs, setJobs] = useState<Opportunity[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [jobs, setJobs] = useState<Opportunity[]>(initialOpportunities)
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedJob, setSelectedJob] = useState<Opportunity | null>(null)
   const isMobile = useMediaQuery("(max-width: 640px)")
 
   useEffect(() => {
     async function fetchJobs() {
+      setIsLoading(true)
       try {
-        const response = await fetch('/api/opportunities', {
-          cache: 'force-cache'
-        });
+        const response = await fetch('/api/opportunities')
         if (!response.ok) throw new Error('Failed to fetch')
 
         const data = await response.json()
@@ -36,13 +35,12 @@ function PostedJobsList() {
         setIsLoading(false)
       }
     }
-    fetchJobs();
 
-    const intervalId = setInterval(fetchJobs, 60000);
+    const intervalId = setInterval(fetchJobs, 60000)
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId)
   }, [])
-
+  
   /* if (!session) {
     return (
       <main className="flex h-full w-full flex-col items-center justify-center">

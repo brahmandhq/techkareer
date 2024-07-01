@@ -7,6 +7,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const opportunities = await db.opportunity.findMany({
         orderBy: { createdAt: 'desc' },
       })
+      
+      // Set caching headers
+      res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate')
+      
       res.status(200).json(opportunities)
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch opportunities' })
